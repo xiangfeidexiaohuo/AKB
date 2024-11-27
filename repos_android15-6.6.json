@@ -1,0 +1,62 @@
+[
+    {
+        "kernelSource": {
+            "name": "android15-6.6-lts-gki",
+            "repo": "https://github.com/aosp-mirror/kernel_common",
+            "branch": "android15-6.6-lts",
+            "device": "gki"
+        },
+        "withKernelSU": false,
+        "toolchains": [
+            {
+                "repo": "https://android.googlesource.com/platform/prebuilts/gas/linux-x86",
+                "branch": "master",
+                "name": "gas"
+            },
+            {
+                "repo": "https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r416183b/",
+                "branch": "11.0",
+                "name": "clang"
+            }
+        ],
+        "params": {
+            "ARCH": "arm64",
+            "CROSS_COMPILE": "aarch64-linux-gnu-",
+            "CROSS_COMPILE_ARM32": "arm-linux-gnueabi-",
+            "CROSS_COMPILE_COMPAT": "arm-linux-gnueabi-",
+            "CLANG_TRIPLE": "aarch64-linux-gnu-",
+            "AR": "",
+            "CC": "clang"
+        }
+    },
+    {
+        "kernelSource": {
+            "name": "android15-6.6-gki",
+            "repo": "https://github.com/aosp-mirror/kernel_common",
+            "branch": "android15-6.6",
+            "device": "gki"
+        },
+        "withKernelSU": false,
+        "toolchains": [
+            {
+                "repo": "https://android.googlesource.com/platform/prebuilts/gas/linux-x86",
+                "branch": "master",
+                "name": "gas"
+            },
+            {
+                "repo": "https://github.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r416183b/",
+                "branch": "11.0",
+                "name": "clang"
+            }
+        ],
+        "params": {
+            "ARCH": "arm64",
+            "CROSS_COMPILE": "aarch64-linux-gnu-",
+            "CROSS_COMPILE_ARM32": "arm-linux-gnueabi-",
+            "CROSS_COMPILE_COMPAT": "arm-linux-gnueabi-",
+            "CLANG_TRIPLE": "aarch64-linux-gnu-",
+            "AR": "",
+            "CC": "clang"
+        }
+    }
+]
