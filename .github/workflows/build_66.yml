@@ -86,6 +86,31 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           cd AKB
+          
+          sed -i 's/CONFIG_LOCALVERSION=\"-4k\"/CONFIG_LOCALVERSION=\"~ETO@Next\"/g' common/arch/arm64/configs/gki_defconfig 
+          sed -i 's/=m/=y/g' common/arch/arm64/configs/gki_defconfig
+          sed -i 's/CONFIG_ZRAM=y/CONFIG_ZRAM=m\nCONFIG_ZSMALLOC=m/g' common/arch/arm64/configs/gki_defconfig
+          
+          sed -i 's/# CONFIG_TCP_CONG_WESTWOOD is not set/CONFIG_TCP_CONG_WESTWOOD=y/g' common/arch/arm64/configs/gki_defconfig 
+          sed -i 's/# CONFIG_TCP_CONG_BIC is not set/CONFIG_TCP_CONG_BIC=y/g' common/arch/arm64/configs/gki_defconfig 
+
+          sed -i "1iCONFIG_NTFS3_FS=y\nCONFIG_CIFS=y" common/arch/arm64/configs/gki_defconfig 
+          
+          echo "关闭验证"
+          sed -i '/POST_DEFCONFIG_CMDS/d' common/build.config.gki
+          
+          sed -i '/virtio_blk.ko/d' common/modules.bzl
+          sed -i '/bluetooth\/btbcm.ko/,+39d' common/modules.bzl
+          sed -i '/6lowpan\/6lowpan.ko/,+28d' common/modules.bzl
+          sed -i '/ptp_kvm.ko/d' common/modules.bzl
+          sed -i '/gzvm.ko/,+2d' common/modules.bzl
+          sed -i '/kunit\/kunit.ko/d' common/modules.bzl
+          sed -i '/regmap-kunit.ko/,+15d' common/modules.bzl
+          sed -i '/clk-gate_test.ko/,+1d' common/modules.bzl
+          sed -i '/kheaders.ko/d' common/modules.bzl
+          
+          sed -i '/libarc4.ko/d' common/modules.bzl
+       
           tools/bazel run --config=fast --config=stamp --lto=thin //common:kernel_aarch64_dist -- --dist_dir=dist
           rm -f dist/vmlinux dist/*.gz
           
