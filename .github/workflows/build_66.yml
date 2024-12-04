@@ -1,7 +1,7 @@
 name: "Build kernel 6.6"
 
 env:
-  CONFIGURATION: "repos_android15-6.6.json"
+  CONFIGURATION: "repos_android14-6.1.json"
   OUT_DIR: "out"
 
 on:
@@ -56,7 +56,7 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/xiangfeidexiaohuo/AKB
           cd AKB
-          repo init --depth 1 -u https://android.googlesource.com/kernel/manifest -b common-android15-6.6-lts
+          repo init --depth 1 -u https://android.googlesource.com/kernel/manifest -b common-android14-6.1-lts
           repo sync -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
           rm -rf common .repo
           
@@ -86,6 +86,19 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           cd AKB
+          
+          sed -i "1iCONFIG_LOCALVERSION=\"~ETO@Next\"\nCONFIG_NTFS3_FS=y\nCONFIG_CIFS=y\nCONFIG_TCP_CONG_WESTWOOD=y\nCONFIG_TCP_CONG_BIC=y" common/arch/arm64/configs/gki_defconfig 
+          sed -i 's/=m/=y/g' common/arch/arm64/configs/gki_defconfig
+          sed -i 's/CONFIG_ZRAM=y/CONFIG_ZRAM=m\nCONFIG_ZSMALLOC=m/g' common/arch/arm64/configs/gki_defconfig
+     
+          echo "关闭验证"
+          sed -i '/POST_DEFCONFIG_CMDS/d' common/build.config.gki
+          
+          sed -i '/bluetooth\/btbcm.ko/,+30d' common/modules.bzl
+          sed -i '/6lowpan\/6lowpan.ko/,+25d' common/modules.bzl
+          sed -i '/gzvm.ko/d' common/modules.bzl
+
+ 
           tools/bazel run --config=fast --config=stamp --lto=thin //common:kernel_aarch64_dist -- --dist_dir=dist
           rm -f dist/vmlinux dist/*.gz
           

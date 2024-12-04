@@ -1,9 +1,9 @@
 [
     {
         "kernelSource": {
-            "name": "android15-6.6-lts-gki",
+            "name": "android14-6.1-lts-gki",
             "repo": "https://github.com/aosp-mirror/kernel_common",
-            "branch": "android15-6.6-lts",
+            "branch": "android14-6.1-lts",
             "device": "gki"
         },
         "withKernelSU": false,
@@ -31,9 +31,9 @@
     },
     {
         "kernelSource": {
-            "name": "android15-6.6-gki",
+            "name": "android14-6.1-gki",
             "repo": "https://github.com/aosp-mirror/kernel_common",
-            "branch": "android15-6.6",
+            "branch": "android14-6.1",
             "device": "gki"
         },
         "withKernelSU": false,
