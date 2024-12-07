@@ -2,7 +2,7 @@
     {
         "kernelSource": {
             "name": "android15-6.6-lts-gki",
-            "repo": "https://github.com/aosp-mirror/kernel_common",
+            "repo": "https://github.com/xiangfeidexiaohuo/kernel_common",
             "branch": "android15-6.6-lts",
             "device": "gki"
         },
