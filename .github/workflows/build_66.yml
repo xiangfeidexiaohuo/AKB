@@ -87,9 +87,13 @@ jobs:
           echo "PATH Variable: $PATH"
           cd AKB
           
-          sed -i "1iCONFIG_LOCALVERSION=\"~ETO@Next\"\nCONFIG_NTFS3_FS=y\nCONFIG_CIFS=y\nCONFIG_TCP_CONG_WESTWOOD=y\nCONFIG_TCP_CONG_BIC=y" common/arch/arm64/configs/gki_defconfig 
-          sed -i 's/=m/=y/g' common/arch/arm64/configs/gki_defconfig
-          sed -i 's/CONFIG_ZRAM=y/CONFIG_ZRAM=m\nCONFIG_ZSMALLOC=m/g' common/arch/arm64/configs/gki_defconfig
+          rm -rf ./common/arch/arm64/configs/gki_defconfig
+          wget -P ./common/arch/arm64/configs/ https://raw.githubusercontent.com/xiangfeidexiaohuo/AKB/refs/heads/6.1/tmp/gki_defconfig
+         
+          # sed -i "1iCONFIG_LOCALVERSION=\"~ETO@Next\"\nCONFIG_NTFS3_FS=y\nCONFIG_CIFS=y" common/arch/arm64/configs/gki_defconfig
+          # sed -i 's/=m/=y/g' common/arch/arm64/configs/gki_defconfig
+          # sed -i 's/CONFIG_ZRAM=y/CONFIG_ZRAM=m\nCONFIG_ZSMALLOC=m/g' common/arch/arm64/configs/gki_defconfig
+          # sed -i 's/# CONFIG_TCP_CONG_ADVANCED is not set/CONFIG_TCP_CONG_ADVANCED=y\nCONFIG_TCP_CONG_WESTWOOD=y\nCONFIG_TCP_CONG_BIC=y\nCONFIG_TCP_CONG_BBR=y\n# CONFIG_TCP_CONG_HTCP is not set/g' common/arch/arm64/configs/gki_defconfig
      
           echo "关闭验证"
           sed -i '/POST_DEFCONFIG_CMDS/d' common/build.config.gki

@@ -2,7 +2,7 @@
     {
         "kernelSource": {
             "name": "android14-6.1-lts-gki",
-            "repo": "https://github.com/aosp-mirror/kernel_common",
+            "repo": "https://github.com/xiangfeidexiaohuo/kernel_common",
             "branch": "android14-6.1-lts",
             "device": "gki"
         },
